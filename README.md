@@ -56,17 +56,10 @@ The layout of an apartment may look as follows :
 # How to get started
 
 ```
-cd apartmentLayout\
-
-docker build --target dev . -t go
-docker run -it -v ${PWD}:/work go sh
-go version
-
-cd apartmentLayout
+./start.sh
 
 go build
 go test -v
-./apartmentLayout
 ```
 
 # Things that needs to be done

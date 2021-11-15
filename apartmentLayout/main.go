@@ -16,7 +16,6 @@ type LayoutStructure struct {
 func main() {
 
 	content, err := ioutil.ReadFile("rooms.txt")
-	//var layout LayoutStrcture
 
 	if err != nil {
 		log.Fatal(err)
