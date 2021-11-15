@@ -42,13 +42,7 @@ func HandleContent(content string) (LayoutStructure, error) {
 	if last != "+" {
 		return LayoutStructure{}, errors.New("apartment doesn't end with +")
 	}
-	// for _, x := range content {
 
-	// 	if x == '+' {
-	// 		cornersCount++
-	// 	}
-
-	// }
 	for i := 0; i < len(content); i++ {
 		if string(content[i]) == "+" {
 			cornersCount++
