@@ -1,0 +1,20 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Launch test function",
+        "type": "go",
+        "request": "launch",
+        "mode": "test",
+        "program": "${workspaceFolder}/apartmentLayout",
+        "args": [
+          "-test.run",
+          "Test_ReadRoom",
+          // * can use reguler expression
+          // * NOT include "Test"
+          // * the first charactor MUST be small
+          "main.go"
+        ]
+      }
+    ]
+  }
