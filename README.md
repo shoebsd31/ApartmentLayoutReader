@@ -61,7 +61,7 @@ The layout of an apartment may look as follows :
 go build
 go test -v
 // to run a specific test
-go test -run Test_ReadRoom
+go test -run Test_ReadRoom -v
 ```
 
 # Things that needs to be done

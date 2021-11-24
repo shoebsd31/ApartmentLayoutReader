@@ -49,8 +49,7 @@ func Test_ValidateWidthCharacter(t *testing.T) {
 }
 
 func Test_ReadRoom(t *testing.T) {
-
-	_, err := HandleContent(`+-----------+
+	layout, err := HandleContent(`+-----------+
 	|           |
 	| (closet)  |
 	|         P |
@@ -61,6 +60,15 @@ func Test_ReadRoom(t *testing.T) {
 
 	if err != nil {
 		t.Errorf("FAILED with error: '%v'", err)
+	}
+
+	if layout.Corners == 4 {
+		t.Logf("Expected Corners '%v', GOT  '%v'", 4, layout.Corners)
+	}
+	if layout.Width == 11 {
+		t.Logf("Expected Width '%v', GOT  '%v'", 11, layout.Width)
+	} else {
+		t.Errorf("Expected Width '%v', GOT  '%v'", 11, layout.Width)
 	}
 
 }

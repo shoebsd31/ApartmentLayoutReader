@@ -33,6 +33,7 @@ func main() {
 func HandleContent(content string) (LayoutStructure, error) {
 
 	var cornersCount = 0
+	var widthCount = 0
 	first := content[0:1]
 	last := content[len(content)-1:]
 
@@ -47,9 +48,12 @@ func HandleContent(content string) (LayoutStructure, error) {
 		if string(content[i]) == "+" {
 			cornersCount++
 		}
+		if string(content[i]) == "-" {
+			widthCount++
+		}
 	}
 	return LayoutStructure{
 		Corners: cornersCount,
-		Width:   len(content),
+		Width:   widthCount / 2, //workaround ideally it must be calculated between 2 pluses
 	}, nil
 }

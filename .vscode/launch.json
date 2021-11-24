@@ -2,6 +2,13 @@
     "version": "0.2.0",
     "configurations": [
       {
+            "name": "Launch Package",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/apartmentLayout"
+      },
+      {
         "name": "Launch test function",
         "type": "go",
         "request": "launch",
