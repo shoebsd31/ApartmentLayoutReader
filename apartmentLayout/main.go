@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"strings"
 )
 
 type LayoutStructure struct {
@@ -44,6 +45,7 @@ func HandleContent(content string) (LayoutStructure, error) {
 		return LayoutStructure{}, errors.New("apartment doesn't end with +")
 	}
 
+	var newLines = strings.Split(content, "\n\t")
 	for i := 0; i < len(content); i++ {
 		if string(content[i]) == "+" {
 			cornersCount++
@@ -54,6 +56,7 @@ func HandleContent(content string) (LayoutStructure, error) {
 	}
 	return LayoutStructure{
 		Corners: cornersCount,
+		Height:  len(newLines),
 		Width:   widthCount / 2, //workaround ideally it must be calculated between 2 pluses
 	}, nil
 }

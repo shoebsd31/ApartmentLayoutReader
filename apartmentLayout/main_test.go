@@ -58,17 +58,29 @@ func Test_ReadRoom(t *testing.T) {
 	|           |
 	+-----------+`)
 
+	var expectedCorners = 4
+	var expectedWidth = 11
+	var expectedHeight = 8
 	if err != nil {
 		t.Errorf("FAILED with error: '%v'", err)
 	}
 
-	if layout.Corners == 4 {
-		t.Logf("Expected Corners '%v', GOT  '%v'", 4, layout.Corners)
-	}
-	if layout.Width == 11 {
-		t.Logf("Expected Width '%v', GOT  '%v'", 11, layout.Width)
+	if layout.Corners == expectedCorners {
+		t.Logf("Expected Corners '%v', GOT  '%v'", expectedCorners, layout.Corners)
 	} else {
-		t.Errorf("Expected Width '%v', GOT  '%v'", 11, layout.Width)
+		t.Errorf("Expected Corners '%v', GOT  '%v'", expectedCorners, layout.Corners)
+	}
+
+	if layout.Width == expectedWidth {
+		t.Logf("Expected Width '%v', GOT  '%v'", expectedWidth, layout.Width)
+	} else {
+		t.Errorf("Expected Width '%v', GOT  '%v'", expectedWidth, layout.Width)
+	}
+
+	if layout.Height == expectedHeight {
+		t.Logf("Expected Height '%v', GOT  '%v'", expectedHeight, layout.Height)
+	} else {
+		t.Errorf("Expected Height '%v', GOT  '%v'", expectedHeight, layout.Height)
 	}
 
 }
