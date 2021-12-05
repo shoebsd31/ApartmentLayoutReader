@@ -2,6 +2,8 @@ package main
 
 import (
 	"testing"
+
+	"github.com/google/go-cmp/cmp"
 )
 
 // TestHelloName calls greetings.Hello with a name, checking
@@ -62,6 +64,10 @@ func Test_ReadRoom(t *testing.T) {
 	var expectedWidth = 11
 	var expectedHeight = 8
 	var expectedRoomName = "closet"
+	var expectedChairArray []string
+	expectedChairArray = append(expectedChairArray, "P")
+	expectedChairArray = append(expectedChairArray, "P")
+	expectedChairArray = append(expectedChairArray, "P")
 	if err != nil {
 		t.Errorf("FAILED with error: '%v'", err)
 	}
@@ -90,4 +96,13 @@ func Test_ReadRoom(t *testing.T) {
 		t.Errorf("Expected Room name '%v', GOT  '%v'", expectedRoomName, layout.RoomName)
 	}
 
+	if cmp.Equal(layout.ChairArray, expectedChairArray) {
+
+		for index, itr := range layout.ChairArray {
+			t.Logf("Expected ChairArray '%v' at '%d', GOT  '%v'", itr, index, expectedChairArray[index])
+		}
+
+	} else {
+		t.Errorf("Expected ChairArray '%v', GOT  '%v'", expectedRoomName, layout.RoomName)
+	}
 }

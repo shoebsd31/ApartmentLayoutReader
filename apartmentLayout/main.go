@@ -14,6 +14,7 @@ type LayoutStructure struct {
 	MinimumWidth int
 	MaximumWidth int
 	RoomName     string
+	ChairArray   []string
 }
 
 func main() {
@@ -39,8 +40,9 @@ func HandleContent(content string) (LayoutStructure, error) {
 	var widthCount = 0
 	first := content[0:1]
 	last := content[len(content)-1:]
-	// var height = 0
+	var height = 0
 	var wallsize = 0
+
 	if first != "+" {
 		return LayoutStructure{}, errors.New("apartment doesn't start with +")
 	}
@@ -54,7 +56,18 @@ func HandleContent(content string) (LayoutStructure, error) {
 	var roomname string = ""
 	var cornerFound = false
 	var widthArray []int
+	var chairArray []string
+	var wallStart = false
 	for i := 0; i < len(content); i++ {
+
+		if string(content[i]) == "\t" {
+			continue
+		}
+
+		if string(content[i]) == "\n" {
+			height++
+			continue
+		}
 
 		if string(content[i]) == "+" {
 			cornersCount++
@@ -65,17 +78,18 @@ func HandleContent(content string) (LayoutStructure, error) {
 				widthArray = append(widthArray, widthCount)
 				widthCount = 0
 			}
+			continue
 		}
 
-		// if string(content[i]) == "\n" {
-		// 	height++
-		// }
 		if cornerFound && string(content[i]) == "-" {
 			widthCount++
+			continue
 		}
 		//wall found
 		if string(content[i]) == "|" || string(content[i]) == "/" || string(content[i]) == "\\" {
 			wallsize++
+			wallStart = !wallStart
+			continue
 		}
 
 		var sb strings.Builder
@@ -84,17 +98,22 @@ func HandleContent(content string) (LayoutStructure, error) {
 			sb.WriteString(roomname)
 			if string(content[i]) != ")" {
 				sb.WriteString(string(content[i]))
+			} else {
+				roomStarts = !roomStarts
+				continue
 			}
 			roomname = sb.String()
 		}
 		if string(content[i]) == "(" {
 			isRoomNameFound = true
-			roomStarts = true
+			roomStarts = !roomStarts
+			continue
 		}
-		if string(content[i]) == ")" {
-			isRoomNameFound = true
-			roomStarts = false
+
+		if !roomStarts && string(content[i]) != " " {
+			chairArray = append(chairArray, string(content[i]))
 		}
+
 	}
 	min, max := findMinAndMax(widthArray)
 	return LayoutStructure{
@@ -103,6 +122,7 @@ func HandleContent(content string) (LayoutStructure, error) {
 		RoomName:     roomname,
 		MinimumWidth: min,
 		MaximumWidth: max,
+		ChairArray:   chairArray,
 	}, nil
 }
 
