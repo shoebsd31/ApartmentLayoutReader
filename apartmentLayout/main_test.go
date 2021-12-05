@@ -13,7 +13,7 @@ func Test_CheckCorners(t *testing.T) {
 		t.Errorf("Handle content failed with error %v", err)
 	}
 	t.Logf("Total Corners SUCCESS, expected %d, got %d", 3, result.Corners)
-	t.Logf("Total Width SUCCESS, expected %d, got %d", 18, result.Width)
+	t.Logf("Total Width SUCCESS, expected %d, got %d", 18, result.MaximumWidth)
 
 }
 
@@ -61,6 +61,7 @@ func Test_ReadRoom(t *testing.T) {
 	var expectedCorners = 4
 	var expectedWidth = 11
 	var expectedHeight = 8
+	var expectedRoomName = "closet"
 	if err != nil {
 		t.Errorf("FAILED with error: '%v'", err)
 	}
@@ -71,16 +72,22 @@ func Test_ReadRoom(t *testing.T) {
 		t.Errorf("Expected Corners '%v', GOT  '%v'", expectedCorners, layout.Corners)
 	}
 
-	if layout.Width == expectedWidth {
-		t.Logf("Expected Width '%v', GOT  '%v'", expectedWidth, layout.Width)
+	if layout.MaximumWidth == expectedWidth {
+		t.Logf("Expected Width '%v', GOT  '%v'", expectedWidth, layout.MaximumWidth)
 	} else {
-		t.Errorf("Expected Width '%v', GOT  '%v'", expectedWidth, layout.Width)
+		t.Errorf("Expected Width '%v', GOT  '%v'", expectedWidth, layout.MaximumWidth)
 	}
 
 	if layout.Height == expectedHeight {
 		t.Logf("Expected Height '%v', GOT  '%v'", expectedHeight, layout.Height)
 	} else {
 		t.Errorf("Expected Height '%v', GOT  '%v'", expectedHeight, layout.Height)
+	}
+
+	if layout.RoomName == expectedRoomName {
+		t.Logf("Expected Room name '%v', GOT  '%v'", expectedRoomName, layout.RoomName)
+	} else {
+		t.Errorf("Expected Room name '%v', GOT  '%v'", expectedRoomName, layout.RoomName)
 	}
 
 }
